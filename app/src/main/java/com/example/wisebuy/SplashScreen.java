@@ -24,7 +24,7 @@ public class SplashScreen extends AppCompatActivity {
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_splash_screen);
 
-        //Animatios
+        //Animations
         topAnim= AnimationUtils.loadAnimation(this,R.anim.top_anim);
         botAnim= AnimationUtils.loadAnimation(this,R.anim.bot_anim);
 

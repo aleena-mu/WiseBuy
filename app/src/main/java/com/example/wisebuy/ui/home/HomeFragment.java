@@ -1,22 +1,29 @@
 package com.example.wisebuy.ui.home;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
-import android.widget.SearchView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.example.wisebuy.R;
+import com.example.wisebuy.adapters.SliderAdapter;
 import com.example.wisebuy.databinding.FragmentHomeBinding;
+import com.example.wisebuy.services.OfferService;
+import com.smarteist.autoimageslider.IndicatorView.animation.type.IndicatorAnimationType;
+import com.smarteist.autoimageslider.SliderAnimations;
+import com.smarteist.autoimageslider.SliderView;
 
 public class HomeFragment extends Fragment {
 
     private FragmentHomeBinding binding;
+    private SliderAdapter adapter;
+    private SliderView sliderView;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -26,7 +33,27 @@ public class HomeFragment extends Fragment {
         binding = FragmentHomeBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
-        final SearchView searchView = binding.linear.findViewById(R.id.searchView);
+       adapter=new SliderAdapter(getContext());
+       sliderView=root.findViewById(R.id.imageSlider);
+       sliderView.setSliderAdapter(adapter);
+
+        sliderView.setIndicatorAnimation(IndicatorAnimationType.WORM); //set indicator animation by using SliderLayout.IndicatorAnimations. :WORM or THIN_WORM or COLOR or DROP or FILL or NONE or SCALE or SCALE_DOWN or SLIDE and SWAP!!
+        sliderView.setSliderTransformAnimation(SliderAnimations.SIMPLETRANSFORMATION);
+        sliderView.setAutoCycleDirection(SliderView.AUTO_CYCLE_DIRECTION_BACK_AND_FORTH);
+        sliderView.setIndicatorSelectedColor(Color.WHITE);
+        sliderView.setIndicatorUnselectedColor(Color.GRAY);
+        sliderView.setScrollTimeInSec(3);
+        sliderView.setAutoCycle(true);
+        sliderView.startAutoCycle();
+
+        OfferService.getOffers(offers -> {
+            adapter.renewItems(offers);
+
+        },e -> {
+            Toast.makeText(getContext(),e.getMessage(),Toast.LENGTH_SHORT).show();
+
+        });
+
 
         // Observe changes in the HomeViewModel
         homeViewModel.getText().observe(getViewLifecycleOwner(), newText -> {
