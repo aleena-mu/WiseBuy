@@ -9,6 +9,7 @@
     <color name="colorPrimary">#14274F</color>
     <color name="colorTop">#5A6D95</color>
     <color name="offerTitle">#FDFF682D</color>
+    <color name="Colorbottom">#BBCBEC</color>
 
     <color name="colorPrimaryVariant"> #3E4E70</color>
 </resources>

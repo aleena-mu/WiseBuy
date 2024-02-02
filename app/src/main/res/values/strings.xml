@@ -17,5 +17,8 @@
     <string name="offer_products">On all HP printers</string>
     <string name="login">Login</string>
     <string name="signInMessage">Enjoy Wise Buy with all features</string>
+    <string name="currency_sign">RS.</string>
+    <string name="content_image_description">product_image</string>
+    <string name="cartButtonText">Add to cart</string>
 
 </resources>

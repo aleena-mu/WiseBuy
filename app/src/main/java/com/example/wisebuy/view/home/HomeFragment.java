@@ -1,4 +1,4 @@
-package com.example.wisebuy.ui.home;
+package com.example.wisebuy.view.home;
 
 import android.graphics.Color;
 import android.os.Bundle;
@@ -14,7 +14,7 @@ import androidx.lifecycle.ViewModelProvider;
 import com.example.wisebuy.R;
 import com.example.wisebuy.adapters.SliderAdapter;
 import com.example.wisebuy.databinding.FragmentHomeBinding;
-import com.example.wisebuy.services.OfferService;
+import com.example.wisebuy.repositories.HomeRepository;
 import com.smarteist.autoimageslider.IndicatorView.animation.type.IndicatorAnimationType;
 import com.smarteist.autoimageslider.SliderAnimations;
 import com.smarteist.autoimageslider.SliderView;
@@ -46,7 +46,7 @@ public class HomeFragment extends Fragment {
         sliderView.setAutoCycle(true);
         sliderView.startAutoCycle();
 
-        OfferService.getOffers(offers -> {
+        HomeRepository.getOffers(offers -> {
             adapter.renewItems(offers);
 
         },e -> {
