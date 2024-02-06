@@ -20,5 +20,9 @@
     <string name="currency_sign">RS.</string>
     <string name="content_image_description">product_image</string>
     <string name="cartButtonText">Add to cart</string>
+    <string name="trending">TRENDING</string>
+    <string name="hey">Hey!</string>
+    <string name="log_0ut">Log 0ut</string>
+    <string name="top_deals">TOP DEALS</string>
 
 </resources>

@@ -21,6 +21,7 @@ import com.example.wisebuy.R;
 import com.example.wisebuy.adapters.AllProductsAdapter;
 import com.example.wisebuy.databinding.FragmentAllProductsBinding;
 import com.example.wisebuy.repositories.AllProductsRepository;
+import com.example.wisebuy.util.AndroidUtil;
 import com.example.wisebuy.view.auth.LoginOtp;
 import com.example.wisebuy.viewModels.AllProductsViewModel;
 
@@ -34,6 +35,7 @@ public class AllProductsFragment extends Fragment {
     AllProductsAdapter adapter,updatedAdapter;
     SearchView searchView;
     AllProductsViewModel allProductsViewModel;
+    public String categorySearch=null;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -41,6 +43,8 @@ public class AllProductsFragment extends Fragment {
         binding = FragmentAllProductsBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
         searchView=root.findViewById(R.id.searchView);
+        Intent intent=requireActivity().getIntent();
+        categorySearch=intent.getStringExtra("searchValue");
         setupSearchView();
         allProductsView = root.findViewById(R.id.allProductsView);
         allProductsView.setLayoutManager(new LinearLayoutManager(requireContext()));
@@ -56,8 +60,7 @@ public class AllProductsFragment extends Fragment {
                 allProductsView.setAdapter(updatedAdapter);
             }
             else{
-                Intent intent = new Intent(getContext(), NoProductsActivity.class);
-               startActivity(intent);
+                AndroidUtil.showToast(getContext(),"No Products");
             }
         });
         return root;
@@ -67,6 +70,10 @@ public class AllProductsFragment extends Fragment {
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
+                if(categorySearch!=null){
+                    query=categorySearch;
+                }
+
                 allProductsViewModel.searchProducts(query);
                 allProductsViewModel.getSearchResultsLiveData().observe(getViewLifecycleOwner(),productsList -> {
                             if (!productsList.isEmpty()) {
@@ -79,7 +86,9 @@ public class AllProductsFragment extends Fragment {
                             }
                         }
                 );
+
                 return true;
+
             }
 
             @Override

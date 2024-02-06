@@ -1,4 +1,4 @@
-package com.example.wisebuy;
+package com.example.wisebuy.view;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -10,12 +10,16 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 
+import com.example.wisebuy.MainActivity;
+import com.example.wisebuy.R;
+
 public class SplashScreen extends AppCompatActivity {
     Handler handler;
     Runnable runnable;
     //Variable
     Animation topAnim,botAnim;
-    ImageView l;
+
+    ImageView logo;
 
 
     @Override
@@ -29,11 +33,11 @@ public class SplashScreen extends AppCompatActivity {
         botAnim= AnimationUtils.loadAnimation(this,R.anim.bot_anim);
 
         //hooks
-        l=findViewById(R.id.logo);
+        logo=findViewById(R.id.logo);
 
 
-        l.setAnimation(botAnim);
-        l.setAnimation(topAnim);
+        logo.setAnimation(botAnim);
+        logo.setAnimation(topAnim);
         handler = new Handler();
         handler.postDelayed(new Runnable(){
             @Override

@@ -26,4 +26,6 @@
     <item name="android:textColor">@color/white</item>
     </style>
 
+    <style name="trending" parent="Widget.Material3.CardView.Outlined"/>
+
 </resources>
