@@ -43,7 +43,7 @@ android {
 
 dependencies {
     implementation("com.github.smarteist:autoimageslider:1.4.0")
-    implementation("com.github.bumptech.glide:glide:4.11.0")
+    implementation("com.github.bumptech.glide:glide:4.12.0")
     implementation("com.hbb20:ccp:2.5.0")
     implementation("com.google.firebase:firebase-storage")
     implementation(platform("com.google.firebase:firebase-bom:32.7.1"))

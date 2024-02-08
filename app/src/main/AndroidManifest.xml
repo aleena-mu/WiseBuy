@@ -20,13 +20,13 @@
             android:name=".view.allProducts.NoProductsActivity"
             android:exported="false" />
         <activity
-            android:name=".view.auth.NewUser"
+            android:name=".view.auth.RegistrationActivity"
             android:exported="false" />
         <activity
-            android:name=".view.auth.LoginOtp"
+            android:name=".view.auth.LoginOtpActivity"
             android:exported="false" />
         <activity
-            android:name=".view.auth.Login"
+            android:name=".view.auth.LoginActivity"
             android:exported="false" />
         <activity
             android:name=".view.SplashScreen"
@@ -42,7 +42,7 @@
             android:name=".MainActivity"
             android:exported="true"
             android:label="@string/app_name" />
-<activity android:name=".view.allProducts.AllProductsFragment"/>
+
 
         <meta-data
             android:name="preloaded_fonts"

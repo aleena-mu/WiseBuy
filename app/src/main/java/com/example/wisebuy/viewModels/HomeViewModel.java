@@ -22,6 +22,7 @@ public class HomeViewModel extends ViewModel {
     private CategoryAdapter adapter;
     private HomeScreenDealsAdapter dealadapter;
 
+
     public MutableLiveData<Boolean> getDealAdapterLiveData() {
         return dealAdapterLiveData;
     }

@@ -14,12 +14,6 @@ import com.example.wisebuy.MainActivity;
 import com.example.wisebuy.R;
 
 public class SplashScreen extends AppCompatActivity {
-    Handler handler;
-    Runnable runnable;
-    //Variable
-    Animation topAnim,botAnim;
-
-    ImageView logo;
 
 
     @Override
@@ -29,16 +23,17 @@ public class SplashScreen extends AppCompatActivity {
         setContentView(R.layout.activity_splash_screen);
 
         //Animations
-        topAnim= AnimationUtils.loadAnimation(this,R.anim.top_anim);
-        botAnim= AnimationUtils.loadAnimation(this,R.anim.bot_anim);
+        //Variable
+        Animation topAnim = AnimationUtils.loadAnimation(this, R.anim.top_anim);
+        Animation botAnim = AnimationUtils.loadAnimation(this, R.anim.bot_anim);
 
         //hooks
-        logo=findViewById(R.id.logo);
+        ImageView logo = findViewById(R.id.logo);
 
 
         logo.setAnimation(botAnim);
         logo.setAnimation(topAnim);
-        handler = new Handler();
+        Handler handler = new Handler();
         handler.postDelayed(new Runnable(){
             @Override
             public void run() {
