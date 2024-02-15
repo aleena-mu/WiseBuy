@@ -18,6 +18,7 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.example.wisebuy.MainActivity;
+import com.example.wisebuy.MyPreference;
 import com.example.wisebuy.R;
 import com.example.wisebuy.view.auth.LoginActivity;
 import com.example.wisebuy.viewModels.ProfileViewModel;
@@ -37,6 +38,7 @@ public class ProfileFragment extends Fragment {
     private FirebaseAuth auth;
 
     private FirebaseFirestore firestore;
+    MyPreference myPreference ;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -56,16 +58,17 @@ public class ProfileFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
+       myPreference = new MyPreference(requireContext());
         profileViewModel = new ViewModelProvider(this).get(ProfileViewModel.class);
         profileViewModel.getLoggedInUser().observe(getViewLifecycleOwner(), userDetails -> {
 
             if (userDetails != null) {
                 signInLayout.setVisibility(View.GONE);
-                saveUsernameToSharedPreferences(userDetails.getName());
+
+                myPreference.saveUserDetailsToSharedPreferences(userDetails.getName(),userDetails.getDocumentId());
                 profileLayout.setVisibility(View.VISIBLE);
-                SharedPreferences preferences = requireActivity().getSharedPreferences(USER_PREFERENCE, Context.MODE_PRIVATE);
-                String userName = preferences.getString("username", null);
+
+                String userName = myPreference.getUsername();
                 String formattedName = userName != null ? userName : "";
                 nameText.setText(formattedName);
             } else {
@@ -76,8 +79,9 @@ public class ProfileFragment extends Fragment {
         logoutText.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                profileViewModel.logout();
 
+                profileViewModel.logout();
+               myPreference.deleteUserFromSharedPreferences();
                 Intent intent = new Intent(getContext(), MainActivity.class);
                 startActivity(intent);
             }
@@ -94,15 +98,5 @@ public class ProfileFragment extends Fragment {
         });
     }
 
-    private void saveUsernameToSharedPreferences(String username) {
-        SharedPreferences preferences = requireContext().getSharedPreferences(USER_PREFERENCE, Context.MODE_PRIVATE);
-
-        // Check if the preference is empty before saving
-        if (preferences.getString("username", null) == null) {
-            SharedPreferences.Editor editor = preferences.edit();
-            editor.putString("username", username);
-            editor.apply();
-        }
-    }
 
 }

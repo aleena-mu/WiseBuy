@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.wisebuy.R;
 import com.example.wisebuy.models.AllProducts;
@@ -55,10 +56,12 @@ public class AllProductsAdapter extends BaseAdapter {
             convertView.setTag(holder);
         } else {
             holder = (ViewHolder) convertView.getTag();
+
         }
 
         AllProducts allProducts = productList.get(position);
         holder.bind(allProducts);
+
 
         return convertView;
     }
@@ -75,6 +78,7 @@ public class AllProductsAdapter extends BaseAdapter {
         TextView productDescription;
 
         ViewHolder(View itemView) {
+
             productImage = itemView.findViewById(R.id.productImage);
             productTitle = itemView.findViewById(R.id.productTitle);
             productPrice = itemView.findViewById(R.id.productPrice);
@@ -82,7 +86,8 @@ public class AllProductsAdapter extends BaseAdapter {
         }
 
         void bind(AllProducts product) {
-            Picasso.get().load(product.getImageUrl()).into(productImage);
+
+            Picasso.get().load(product.getImageUrls().get(0)).into(productImage);
 
             productTitle.setText(product.getTitle());
             String currencySymbol = "₹";

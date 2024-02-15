@@ -16,6 +16,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.PhoneAuthCredential;
 import com.google.firebase.auth.PhoneAuthOptions;
 import com.google.firebase.auth.PhoneAuthProvider;
+import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -108,9 +109,11 @@ public class UserRepository {
                 if (querySnapshot != null && !querySnapshot.isEmpty()) {
 
                     DocumentSnapshot documentSnapshot = querySnapshot.getDocuments().get(0);
+                    String documentId=documentSnapshot.getId();
                     String userName = documentSnapshot.getString("User_Name");
                     String place = documentSnapshot.getString("Place");
 
+                    User.getInstance().setDocumentId(documentId);
                     User.getInstance().setName(userName);
                     User.getInstance().setPlace(place);
                     User.getInstance().setPhoneNumber(phoneNumber);
@@ -137,10 +140,17 @@ public class UserRepository {
         userData.put("Phone_Number", User.getInstance().getPhoneNumber());
         userData.put("User_Name", User.getInstance().getName());
         userData.put("Place", User.getInstance().getPlace());
+
         Log.d("UserModelCheck",User.getInstance().getPhoneNumber());
+
         db.collection("Users").add(userData)
                 .addOnCompleteListener(task ->{
                     if(task.isSuccessful()){
+
+//                        DocumentReference userDocRef = task.getResult();
+//                        CollectionReference cartCollectionRef = userDocRef.collection("Cart");
+//                        cartCollectionRef.add(userData);
+
                         onUserAddedCompleteListener.onUserAddedComplete(task);
 
                     }

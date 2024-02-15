@@ -23,18 +23,13 @@
            android:textColor="@color/colorPrimary"
            android:layout_marginStart="5dp"/>
 
-        <ImageView
-            android:layout_width="38dp"
-            android:layout_height="25dp"
-            android:layout_marginStart="220dp"
-            android:layout_gravity="top|end"
-            android:src="@drawable/cart_icon"/>
 
         <ImageView
             android:id="@+id/imageView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="top|end"
+            android:layout_marginStart="250dp"
             android:src="@drawable/notifiation" />
 
 
@@ -96,8 +91,8 @@
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/topDealsView"
-                    android:layout_width="455dp"
-                    android:layout_height="wrap_content"
+                    android:layout_width="381dp"
+                    android:layout_height="182dp"
                     android:nestedScrollingEnabled="false"
                     android:orientation="horizontal" />
             </LinearLayout>

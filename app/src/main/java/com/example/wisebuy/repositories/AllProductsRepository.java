@@ -26,14 +26,17 @@ public class AllProductsRepository {
                 productList = new ArrayList<>();
 
                 for (QueryDocumentSnapshot document : task.getResult()) {
+                    String documentId = document.getId();
                     List<String> imageUrls = (List<String>) document.get("imageURLs");
                     String title = document.getString("name");
                     Double price = document.getDouble("price");
-                    String description=document.getString("description");
-                    String type=document.getString("type");
+                    String description = document.getString("description");
+                    String type = document.getString("type");
+                    String brand = document.getString("brand");
+                    String details = document.getString("details");
 
 
-                    AllProducts product = new AllProducts(imageUrls, title, price,description,type);
+                    AllProducts product = new AllProducts(documentId, imageUrls, title, price, description, type,brand,details);
                     productList.add(product);
                 }
 
@@ -46,27 +49,23 @@ public class AllProductsRepository {
 
     public void searchProducts(String query, Consumer<List<AllProducts>> onSuccess, Consumer<Exception> onError) {
         String lowerQuery = query.toLowerCase();
-        Log.d("QueyinRep0",lowerQuery);
+        Log.d("QueyinRep0", lowerQuery);
         List<AllProducts> searchResults = new ArrayList<>();
-
 
 
         for (AllProducts product : productList) {
 
             String lowerTitle = product.getTitle().toLowerCase();
             String lowerType = product.getType().toLowerCase();
-            Log.d("SearchProducts", "Product Title: " + lowerTitle);
-            Log.d("SearchProducts", "Product Type: " + lowerType);
-            Log.d("SearchProducts", "Comparison: " + lowerTitle + " | " + lowerType + " | " + lowerQuery);
 
             if (lowerTitle.contains(lowerQuery) || lowerType.contains(lowerQuery)) {
                 Log.d("SearchProducts1", "Condition is true for: " + lowerTitle + " | " + lowerType + " | " + lowerQuery);
                 searchResults.add(product);
-            }
-            else {
+            } else {
                 Log.d("SearchProducts1", "Condition is false for: " + lowerTitle + " | " + lowerType + " | " + lowerQuery);
                 // Add any additional logic or logging for the else condition if needed
-            }        }
+            }
+        }
 
         Log.d("SearchProducts", "Product List Size: " + productList.size());
         Log.d("SearchProducts", "Search Results Size: " + searchResults.size());
@@ -78,4 +77,26 @@ public class AllProductsRepository {
         }
     }
 
+    public void getProductDetails(String id, Consumer <AllProducts> onSuccess, Consumer<Exception> onError) {
+
+        AllProducts searchResults = new AllProducts();
+
+
+        for (AllProducts product : productList) {
+
+
+            if (id.equals(product.getDocumentId())) {
+                     searchResults=product;
+                break;
+            }
+        }
+
+        if(onSuccess !=null)
+            onSuccess.accept(searchResults);
+         else{
+            onError.accept(new Exception("No matching products found."));
+        }
+
+
+    }
 }

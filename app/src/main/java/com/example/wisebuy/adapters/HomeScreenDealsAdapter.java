@@ -1,6 +1,8 @@
 package com.example.wisebuy.adapters;
 
+import android.app.Activity;
 import android.content.Context;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -8,6 +10,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
@@ -21,6 +25,7 @@ public class HomeScreenDealsAdapter extends RecyclerView.Adapter<HomeScreenDeals
 
     private List<HomeScreenDeals> dealsList;
     private final Context context;
+    private String dealSearch;
 
     public HomeScreenDealsAdapter(Context context, List<HomeScreenDeals> dealsList) {
         this.context = context;
@@ -44,6 +49,14 @@ public class HomeScreenDealsAdapter extends RecyclerView.Adapter<HomeScreenDeals
 
         holder.dealCategory.setText(topDeals.getTitle());
         holder.dealDetail.setText(topDeals.getDeal());
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dealSearch=topDeals.getTitle();
+                navigateToAllProductsFragment(dealSearch);
+
+            }
+        });
     }
 
     @Override
@@ -68,5 +81,14 @@ public class HomeScreenDealsAdapter extends RecyclerView.Adapter<HomeScreenDeals
             dealDetail = itemView.findViewById(R.id.topDealDetail);
 //            dealType = itemView.findViewById(R.id.dealType);
         }
+    }
+    private void navigateToAllProductsFragment(String categoryTitle) {
+        // Pass the category title as an argument to the AllProductsFragment
+        Bundle bundle = new Bundle();
+        bundle.putString("categoryTitle", categoryTitle);
+
+
+        NavController navController = Navigation.findNavController((Activity) context, R.id.nav_host_fragment_activity_main);
+        navController.navigate(R.id.action_navigation_home_to_navigation_all_products,bundle);
     }
 }

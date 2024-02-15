@@ -27,6 +27,80 @@
             android:layout_below="@+id/searchView"
             android:layout_marginTop="4dp"
             android:numColumns="2" />
+<ScrollView
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_below="@+id/searchView">
 
+        <LinearLayout
+            android:id="@+id/productDetails"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
 
+            android:orientation="vertical"
+            android:layout_marginStart="5dp"
+            android:layout_marginEnd="5dp">
+
+                <TextView
+                    android:id="@+id/titleText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="TextView"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="20sp"/>
+
+                <com.smarteist.autoimageslider.SliderView
+                    android:id="@+id/productImageSlider"
+                    android:layout_width="match_parent"
+                    android:layout_height="242dp"
+                    android:nestedScrollingEnabled="false"
+                    app:sliderAnimationDuration="600"
+                    app:sliderAutoCycleDirection="back_and_forth"
+                    app:sliderIndicatorAnimationDuration="600"
+                    app:sliderIndicatorGravity="center_horizontal|bottom"
+                    app:sliderIndicatorMargin="15dp"
+                    app:sliderIndicatorOrientation="horizontal"
+                    app:sliderIndicatorPadding="3dp"
+                    app:sliderIndicatorRadius="2dp"
+                    app:sliderIndicatorSelectedColor="#5A5A5A"
+                    app:sliderIndicatorUnselectedColor="#FFF"
+                    app:sliderScrollTimeInSec="1"
+                    app:sliderStartAutoCycle="false" />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/brandText"
+                    android:textColor="@color/colorPrimary"
+                    android:text="DELL"
+                    android:textSize="15sp"
+                    android:textStyle="bold"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/descriptionText"
+                    android:textColor="@color/black"
+                    android:textStyle="normal"
+                    android:text="detailed description"
+                    android:textSize="15sp"/>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/priceText"
+                    android:textStyle="bold"
+                    android:layout_marginTop="10dp"
+                    android:textSize="20sp"
+                    android:textColor="@color/colorPrimary"/>
+
+                <Button
+                    android:id="@+id/addToCartButton"
+                    android:layout_width="365dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="120dp"
+                    android:text="Add To Cart" />
+
+        </LinearLayout>
+
+</ScrollView>
 </RelativeLayout>

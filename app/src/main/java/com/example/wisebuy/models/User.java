@@ -4,10 +4,19 @@ public class User {
     private String phoneNumber;
     private String name;
     private String place;
+    private String documentId;
+
+    public String getDocumentId() {
+        return documentId;
+    }
 
     private static User instance;
 
     private User() {}
+
+    public void setDocumentId(String documentId) {
+        this.documentId = documentId;
+    }
 
     public static User getInstance() {
         if (instance == null) {

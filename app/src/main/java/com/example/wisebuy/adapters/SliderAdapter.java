@@ -21,6 +21,7 @@ public class SliderAdapter extends
     private final Context context;
     private List<Offer> mSliderItems = new ArrayList<>();
 
+
     public SliderAdapter(Context context) {
         this.context = context;
     }

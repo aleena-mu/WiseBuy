@@ -29,9 +29,12 @@ public class AllProductsViewModel extends ViewModel {
     }
 
     private final MutableLiveData<List<AllProducts>> searchResultsLiveData = new MutableLiveData<>();
+    private final MutableLiveData <AllProducts> productDetailsLiveData = new MutableLiveData<>();
 
 
-
+    public MutableLiveData<AllProducts> getProductDetailsLiveData() {
+        return productDetailsLiveData;
+    }
 
     public LiveData<List<AllProducts>> getSearchResultsLiveData() {
         return searchResultsLiveData;
@@ -81,6 +84,17 @@ public class AllProductsViewModel extends ViewModel {
 
 
                 });
+        }
+
+        public  void  getProductDetails(String id){
+
+          repository.getProductDetails(id, productDetailsLiveData::postValue,
+
+                  e -> {
+                      searchResultsLiveData.postValue(Collections.emptyList());
+
+
+                  });
         }
     }
 
